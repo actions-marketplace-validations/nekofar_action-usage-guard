@@ -3,6 +3,9 @@
 # Making sure the script stops if any of the commands fails
 set -eu
 
+# Enable debug mode if RUNNER_DEBUG is 1
+[[ "${RUNNER_DEBUG:-0}" -eq 1 ]] && set -x
+
 # Function to get visibility of the repository, whether public or private
 get_repo_visibility() {
   gh repo view "$GITHUB_REPOSITORY" --json visibility \
@@ -63,9 +66,7 @@ calculate_usage_percentage() {
   total_minutes_used=$(get_total_minutes_used)
   included_minutes=$(get_included_minutes)
 
-  # use expr for arithmetic in bash 3.2
-  # shellcheck disable=SC2003
-  expr 100 \* "$total_minutes_used" / "$included_minutes"
+  awk -v num1="$total_minutes_used" -v num2="$included_minutes" 'BEGIN {printf "%.2f", (num1*100)/num2}'
 }
 
 # Function to monitor the usage and cancel the run if it exceeds certain threshold
@@ -73,17 +74,16 @@ monitor_usage_and_cancel_run_if_exceeded() {
   local visibility threshold percentage_used
 
   visibility=$(get_repo_visibility)
-  threshold="$INPUT_THRESHOLD"
-  percentage_used=$(calculate_usage_percentage)
-
   if [ "$visibility" = "PUBLIC" ]; then
-    echo -e "\033[1;33mThis is a public repository. Monitoring of usage and action cancellation is skipped.\033[0m"
+    echo -e "\033[1;33mGiven it's a public repo, skipping both usage tracking and action termination.\033[0m"
     return 0
   fi
 
+  percentage_used=$(calculate_usage_percentage)
   echo -e "\033[1;34mThe current total usage is ${percentage_used}%.\033[0m"
 
-  if [ "$percentage_used" -ge "${threshold}" ]; then
+  threshold="$INPUT_THRESHOLD"
+  if [ "$(echo "$percentage_used >= $threshold" | bc -l)" -eq "1" ]; then
     echo -e "\033[1;The usage exceeds the given threshold of ${threshold}%.\033[0m"
     echo -e "\033[1;33mThe ongoing GitHub Action is being cancelled due to overuse...\033[0m"
     gh run cancel "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY"
@@ -91,6 +91,9 @@ monitor_usage_and_cancel_run_if_exceeded() {
     echo -e "\033[1;32mThe usage is below the given threshold of ${threshold}%.\033[0m"
   fi
 }
+
+# Trimming white spaces from input token
+INPUT_TOKEN=$(echo "$INPUT_TOKEN" | xargs)
 
 # Checking the validity of provided token
 if ! echo "$INPUT_TOKEN" | grep -qE "^(gh[ps]_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59})$"; then
@@ -104,8 +107,8 @@ if [[ $INPUT_THRESHOLD -lt 1 || $INPUT_THRESHOLD -gt 100 ]]; then
   exit 1
 fi
 
-# Setting GitHub token as environment variable
-export GITHUB_TOKEN=${INPUT_TOKEN:-"GITHUB_TOKEN"}
+# Authenticates GitHub CLI using a supplied token
+echo "${INPUT_TOKEN}" | gh auth login --with-token
 
 # Call the usage monitoring function
 monitor_usage_and_cancel_run_if_exceeded

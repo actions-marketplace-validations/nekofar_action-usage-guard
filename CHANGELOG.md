@@ -2,64 +2,163 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2025-10-14
+
+### Bug Fixes
+
+- Solve some minor issues and update dependencies
+
+## [1.0.4] - 2024-10-13
+
+### Bug Fixes
+
+- Solve some minor issues and update dependencies
+
+## [1.0.3] - 2024-05-31
+
+### Bug Fixes
+
+- Solve some minor issues and update dependencies
+
+## [1.0.2] - 2024-01-06
+
+### Bug Fixes
+
+- Solve some minor issues and update dependencies
+
+### Documentation
+
+- Update social follow badge in README
+
+## [1.0.1] - 2023-11-02
+
+### Bug Fixes
+
+- Solve some minor issues and update dependencies
+
+## [1.0.0-beta.12] - 2023-08-21
+
+### Bug Fixes
+
+- Adjust condition check in `entrypoint.sh` to handle float
+
+## [1.0.0-beta.11] - 2023-07-31
+
+### Refactor
+
+- Replace expr with awk in `entrypoint.sh` for calculations
+
+## [1.0.0-beta.10] - 2023-07-28
+
+### Documentation
+
+- Rework job order and dependencies in GitHub workflow
+
+## [1.0.0-beta.9] - 2023-07-28
+
+### Refactor
+
+- Update GitHub token authentication process in `entrypoint.sh`
+
+## [1.0.0-beta.8] - 2023-07-28
+
+### Bug Fixes
+
+- Trim whitespaces from input token in `entrypoint.sh`
+
+## [1.0.0-beta.7] - 2023-07-27
+
+### Documentation
+
+- Add Personal Access Token information to README.md
+
+## [1.0.0-beta.6] - 2023-07-27
+
+### Refactor
+
+- Adjust indentation level in `action.yml`
+- Optimize public repo message in `entrypoint.sh`
+
+## [1.0.0-beta.5] - 2023-07-27
+
+### Refactor
+
+- Optimize if conditions of usage calculation in `entrypoint.sh`
+
+## [1.0.0-beta.4] - 2023-07-27
+
+### Refactor
+
+- Add option to activate debug mode in `entrypoint.sh`
+
+## [1.0.0-beta.3] - 2023-07-26
+
+### Bug Fixes
+
+- Change default value of `GITHUB_TOKEN` in `entrypoint.sh`
+
+### Refactor
+
+- Optimize whitespace usage in `action.yml`
+
 ## [1.0.0-beta.2] - 2023-07-25
 
-### <!-- 02 -->Bug Fixes
+### Bug Fixes
 
 - Update icon and color in `action.yml`
 
 ## [1.0.0-beta.1] - 2023-07-25
 
-### <!-- 04 -->Refactor
+### Refactor
 
 - Add comments and increase readability in monitor script
 
 ## [1.0.0-alpha.9] - 2023-07-25
 
-### <!-- 02 -->Bug Fixes
+### Bug Fixes
 
 - Correct notification message formatting in `entrypoint.sh`
 
-### <!-- 07 -->Continuous Integrations
+### Miscellaneous Tasks
 
 - Add dependency to the `lint` job in `prepare.yml`
 - Increase usage guard threshold in GitHub workflow
 
 ## [1.0.0-alpha.8] - 2023-07-25
 
-### <!-- 02 -->Bug Fixes
+### Bug Fixes
 
 - Remove unnecessary newline in echo statements in `entrypoint.sh`
 
-### <!-- 04 -->Refactor
+### Refactor
 
-- Remove 'x' option from bash shell settings in entry script
+- Remove `x` option from bash shell settings in entry script
 
 ## [1.0.0-alpha.7] - 2023-07-25
 
-### <!-- 02 -->Bug Fixes
+### Bug Fixes
 
 - Specify repository in GitHub run cancellation command
 
 ## [1.0.0-alpha.6] - 2023-07-25
 
-### <!-- 02 -->Bug Fixes
+### Bug Fixes
 
 - Add repository argument to gh repo view in `entrypoint.sh`
 
 ## [1.0.0-alpha.5] - 2023-07-25
 
-### <!-- 04 -->Refactor
+### Refactor
 
 - Add verbosity to error handling in `entrypoint.sh`
 
-### <!-- 07 -->Continuous Integrations
+### Miscellaneous Tasks
 
 - Remove checkout step from `prepare.yml`
 
 ## [1.0.0-alpha.4] - 2023-07-25
 
-### <!-- 07 -->Continuous Integrations
+### Miscellaneous Tasks
 
 - Refactor tag version in `prepare.yml`
 - Update job name from `lint` to `guard` in `prepare.yml`
@@ -67,42 +166,42 @@ All notable changes to this project will be documented in this file.
 
 ## [1.0.0-alpha.3] - 2023-07-25
 
-### <!-- 02 -->Bug Fixes
+### Bug Fixes
 
 - Remove redundant echo of Github token in `entrypoint.sh`
 
-### <!-- 04 -->Refactor
+### Refactor
 
 - Update usage messages in `entrypoint.sh`
 - Update shell script for improved readability and user-friendliness
 
 ## [1.0.0-alpha.2] - 2023-07-25
 
-### <!-- 04 -->Refactor
+### Refactor
 
 - Add verbosity to entrypoint.sh script execution
 
 ## [1.0.0-alpha.1] - 2023-07-25
 
-### <!-- 02 -->Bug Fixes
+### Bug Fixes
 
 - Update description and requirement status of GitHub token in `action.yml`
 
-### <!-- 05 -->Documentation
+### Documentation
 
 - Update GitHub token in Action config for better access control
 
-### <!-- 07 -->Continuous Integrations
+### Miscellaneous Tasks
 
 - Update GitHub token in Action Usage Guard
 
 ## [1.0.0-alpha.0] - 2023-07-25
 
-### <!-- 01 -->Features
+### Features
 
 - Create usage guard action and token authentication utility
 
-### <!-- 05 -->Documentation
+### Documentation
 
 - Add Apache License 2.0 to the project
 - Add issue templates for bug reports and feature requests
@@ -110,15 +209,12 @@ All notable changes to this project will be documented in this file.
 - Add `CONTRIBUTING.md` for project contributions guidance
 - Add `README` for Action Usage Guard
 
-### <!-- 07 -->Continuous Integrations
+### Miscellaneous Tasks
 
 - Add GitHub actions for release preparation and publishing
 - Add dependabot configuration for GitHub Actions
 - Add `stalebot` configuration file
-- Add Action Usage Guard to workflow and update checkout version
-
-### <!-- 08 -->Miscellaneous Tasks
-
 - Add `git-cliff` configuration file
+- Add Action Usage Guard to workflow and update checkout version
 
 <!-- generated by git-cliff -->
